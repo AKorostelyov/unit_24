@@ -1,6 +1,9 @@
+import comparator.ComparatorProvider;
+import comparator.StudentComparator;
+import comparator.UniversityComparator;
+import enums.StudentComparators;
+import enums.UniversityComparators;
 import input.ExcelManager;
-import model.Student;
-import model.University;
 
 import java.io.IOException;
 
@@ -14,12 +17,16 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for(Student student : ExcelManager.getStudentCollection()) {
-            System.out.println(student);
-        }
-        for(University university:ExcelManager.getUniversitiesCollection()){
-            System.out.println(university);
-        }
+
+        StudentComparator studentComparator = ComparatorProvider.getStudentComparator(StudentComparators.AVG_SCORE);
+        UniversityComparator universityComparator = ComparatorProvider.getUniversityComparator(UniversityComparators.FULL_NAME);
+
+        ExcelManager.getStudentCollection().stream()
+                .sorted(studentComparator)
+                .forEach(System.out::println);
+        ExcelManager.getUniversitiesCollection().stream()
+                .sorted(universityComparator)
+                .forEach(System.out::println);
     }
 
 }
