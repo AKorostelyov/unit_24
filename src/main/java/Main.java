@@ -1,12 +1,14 @@
-import comparator.ComparatorProvider;
+import output.XlsWriter;
+import util.ComparatorProvider;
 import comparator.StudentComparator;
 import comparator.UniversityComparator;
 import enums.StudentComparators;
 import enums.UniversityComparators;
 import input.ExcelManager;
-import json.JsonUtil;
+import util.JsonUtil;
 import model.Student;
 import model.University;
+import util.StatisticUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,8 +24,10 @@ public class Main {
             e.printStackTrace();
         }
 
-        StudentComparator studentComparator = ComparatorProvider.getStudentComparator(StudentComparators.AVG_SCORE);
-        UniversityComparator universityComparator = ComparatorProvider.getUniversityComparator(UniversityComparators.FULL_NAME);
+        StudentComparator studentComparator = ComparatorProvider
+                .getStudentComparator(StudentComparators.AVG_SCORE);
+        UniversityComparator universityComparator = ComparatorProvider
+                .getUniversityComparator(UniversityComparators.FULL_NAME);
 
         List<Student> studentCollection = ExcelManager.getStudentCollection();
         studentCollection.sort(studentComparator);
@@ -52,6 +56,10 @@ public class Main {
             System.out.println(json);
             System.out.println(JsonUtil.deserialize(json,University.class));
         });
+
+        XlsWriter.writeXlsStatistics(
+                StatisticUtil.getStatistics(studentCollection,universityCollection),
+                "statistic.xlsx");
 
     }
 
