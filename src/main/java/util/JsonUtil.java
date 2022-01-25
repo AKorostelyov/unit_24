@@ -1,4 +1,4 @@
-package json;
+package util;
 
 import com.google.gson.*;
 
