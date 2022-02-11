@@ -58,4 +58,15 @@ public class Statistics {
         this.universityNameList = universityNameList;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Statistics{" +
+                "profile=" + profile +
+                ", avgScore=" + avgScore +
+                ", profileStudentNumber=" + profileStudentNumber +
+                ", profileUniversityNumber=" + profileUniversityNumber +
+                ", universityNameList='" + universityNameList + '\'' +
+                '}';
+    }
 }

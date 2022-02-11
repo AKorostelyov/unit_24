@@ -11,9 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalDouble;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class StatisticUtil {
+    private final static Logger LOGGER = Logger.getLogger(StatisticUtil.class.getSimpleName());
 
     private StatisticUtil(){}
 
@@ -55,6 +58,7 @@ public class StatisticUtil {
                     statRow.setAvgScore(0);
                     avgExamScore.ifPresent(value -> statRow.setAvgScore(
                             BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_UP).doubleValue()));
+                    LOGGER.log(Level.SEVERE, "Statistic Row: " + statRow.toString() + " was added");
                 }
         );
         return statistics;
