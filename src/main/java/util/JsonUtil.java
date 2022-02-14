@@ -13,7 +13,6 @@ public class JsonUtil {
     }
 
     public static<T> String serializeCollection(List<T> collection) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         JsonObject result = new JsonObject();
         JsonArray jsonArray = new JsonArray();
         result.add(collection.get(0).getClass().getSimpleName().toLowerCase(Locale.ROOT), jsonArray);

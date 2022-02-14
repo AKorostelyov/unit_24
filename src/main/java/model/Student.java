@@ -2,6 +2,11 @@ package model;
 
 import com.google.gson.annotations.SerializedName;
 
+import javax.xml.bind.annotation.*;
+
+@XmlRootElement(name = "studentEntry")
+@XmlType(propOrder = {"fullName", "universityId", "avgExmScore"})
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Student {
 
     @SerializedName("full_name")
@@ -10,6 +15,7 @@ public class Student {
     @SerializedName("university_id")
     private String universityId;
 
+    @XmlTransient
     @SerializedName("current_course")
     private int currentCourseNumber;
 
@@ -22,6 +28,7 @@ public class Student {
         this.currentCourseNumber = currentCourseNumber;
         this.avgExmScore = avgExmScore;
     }
+    public Student() {}
 
     public String getFullName() {
         return fullName;

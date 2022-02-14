@@ -1,10 +1,12 @@
-package output;
+package io;
 
 import model.Statistics;
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -79,7 +81,7 @@ public class XlsWriter {
             names.setCellValue(statRow.getUniversityNameList());
         }
 
-        try (FileOutputStream fileOutputStream = new FileOutputStream(filePath)) {
+        try (FileOutputStream fileOutputStream = FileUtils.openOutputStream(new File("xls/" + filePath))) {
             workbook.write(fileOutputStream);
             LOGGER.log(Level.INFO, filePath + " file was successfully written");
         } catch (IOException e) {

@@ -2,10 +2,13 @@ import comparator.StudentComparator;
 import comparator.UniversityComparator;
 import enums.StudentComparators;
 import enums.UniversityComparators;
-import input.ExcelManager;
+import io.ExcelManager;
+import io.JsonFormatter;
+import io.XlsWriter;
+import io.XmlFormatter;
+import model.Statistics;
 import model.Student;
 import model.University;
-import output.XlsWriter;
 import util.ComparatorProvider;
 import util.StatisticUtil;
 
@@ -47,9 +50,12 @@ public class Main {
         universityCollection.sort(universityComparator);
         LOGGER.log(Level.SEVERE, "University collection are sorted");
 
-        XlsWriter.writeXlsStatistics(
-                StatisticUtil.getStatistics(studentCollection, universityCollection),
-                "statistic.xlsx");
+        List<Statistics> statisticsCollection = StatisticUtil.getStatistics(studentCollection, universityCollection);
+
+        JsonFormatter.convertToJson(studentCollection,universityCollection,statisticsCollection);
+
+        XmlFormatter.convertToXml(studentCollection, universityCollection, statisticsCollection);
+        
 
     }
 

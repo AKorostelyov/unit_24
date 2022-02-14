@@ -1,14 +1,32 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
 import enums.StudyProfile;
 
-import java.util.List;
+import javax.xml.bind.annotation.*;
 
+@XmlType(propOrder = {"profile", "avgScore"})
+@XmlRootElement(name = "statisticEntry")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Statistics {
+
+    @XmlElement(name = "universityProfile")
+    @SerializedName("study_profile")
     StudyProfile profile;
+
+    @SerializedName("avg_score")
+    @XmlElement(name = "avgScore")
     double avgScore;
+
+    @SerializedName("profile_students_number")
+    @XmlTransient
     int profileStudentNumber;
+
+    @SerializedName("profile_universities_number")
+    @XmlTransient
     int profileUniversityNumber;
+
+    @XmlTransient
     String universityNameList;
 
     public Statistics() {
@@ -54,7 +72,7 @@ public class Statistics {
         return universityNameList;
     }
 
-    public Statistics setUniversityNameList(String  universityNameList) {
+    public Statistics setUniversityNameList(String universityNameList) {
         this.universityNameList = universityNameList;
         return this;
     }
